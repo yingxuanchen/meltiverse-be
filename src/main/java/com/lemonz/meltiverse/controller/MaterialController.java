@@ -11,6 +11,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "material")
@@ -55,5 +58,14 @@ public class MaterialController {
     @PreAuthorize("hasRole('ADMIN')")
     void deleteMaterial(@PathVariable Long id) {
         materialService.deleteMaterial(id);
+    }
+
+    @GetMapping("test")
+    List<String> test() {
+        int res = 0;
+        for (int i = 0; i < 100; i++) {
+            res += i;
+        }
+        return Arrays.asList("this", "is", "a", "long", "list", "of", "strings");
     }
 }
