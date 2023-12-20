@@ -25,7 +25,11 @@ public class MaterialController {
             @RequestParam(defaultValue = "") String search,
             @PageableDefault(sort = {"postedDate", "id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable
     ) {
-        return materialService.getMaterials(search, pageable);
+        long start = System.currentTimeMillis();
+        Page<Material> res = materialService.getMaterials(search, pageable)
+        long end = System.currentTimeMillis() - start;
+        System.out.println("test: " + end);
+        return res;
     }
 
     @GetMapping("{id}")
@@ -62,10 +66,13 @@ public class MaterialController {
 
     @GetMapping("test")
     List<String> test() {
+        long start = System.currentTimeMillis();
         int res = 0;
         for (int i = 0; i < 100; i++) {
             res += i;
         }
+        long end = System.currentTimeMillis() - start;
+        System.out.println("test: " + end);
         return Arrays.asList("this", "is", "a", "long", "list", "of", "strings");
     }
 }
